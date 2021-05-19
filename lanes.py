@@ -20,11 +20,11 @@ def average_slope_intercept(image, lines):
             fit = np.polyfit((x1,x2), (y1,y2), 1)
             slope = fit[0]
             intercept = fit[1]
-            if slope < 0: # y is reversed in image
+            if slope < 0:
                 left_fit.append((slope, intercept))
             else:
                 right_fit.append((slope, intercept))
-    # add more weight to longer lines
+
     left_fit_average  = np.average(left_fit, axis=0)
     right_fit_average = np.average(right_fit, axis=0)
     left_line  = make_points(image, left_fit_average)
@@ -77,6 +77,17 @@ def region_of_interest(canny):
 # cropped_canny = region_of_interest(lane_canny)
 # cv2.imshow('result', cropped_canny)
 # cv2.waitKey(0)
+
+
+# lines average
+# image = cv2.imread('test_image.jpg')
+# lane_image = np.copy(image)
+# lane_canny = canny(lane_image)
+# cropped_canny = region_of_interest(lane_canny)
+# lines = cv2.HoughLinesP(cropped_canny, 2, np.pi/180, 100, np.array([]), minLineLength=40,maxLineGap=5)
+# averaged_lines = average_slope_intercept(image, lines)
+# ### print(lines)
+# ### print(averaged_lines)
 
 
 # line_image 
