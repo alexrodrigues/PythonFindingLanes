@@ -61,28 +61,28 @@ def region_of_interest(canny):
     masked_image = cv2.bitwise_and(canny, mask)
     return masked_image
 
-
-# image = cv2.imread('test_image.jpg')
-# lane_image = np.copy(image)
-# lane_canny = canny(lane_image)
-# cropped_canny = region_of_interest(lane_canny)
-# lines = cv2.HoughLinesP(cropped_canny, 2, np.pi/180, 100, np.array([]), minLineLength=40,maxLineGap=5)
-# averaged_lines = average_slope_intercept(image, lines)
-# line_image = display_lines(lane_image, averaged_lines)
-# combo_image = cv2.addWeighted(lane_image, 0.8, line_image, 1, 0)
+image = cv2.imread('test_image.jpg')
+lane_image = np.copy(image)
+lane_canny = canny(lane_image)
+cropped_canny = region_of_interest(lane_canny)
+lines = cv2.HoughLinesP(cropped_canny, 2, np.pi/180, 100, np.array([]), minLineLength=40,maxLineGap=5)
+averaged_lines = average_slope_intercept(image, lines)
+line_image = display_lines(lane_image, averaged_lines)
+combo_image = cv2.addWeighted(lane_image, 0.8, line_image, 1, 0)
+cv2.imshow("result", combo_image)
 
 #
-cap = cv2.VideoCapture("test2.mp4")
-while(cap.isOpened()):
-    _, frame = cap.read()
-    canny_image = canny(frame)
-    cropped_canny = region_of_interest(canny_image)
-    lines = cv2.HoughLinesP(cropped_canny, 2, np.pi/180, 100, np.array([]), minLineLength=40,maxLineGap=5)
-    averaged_lines = average_slope_intercept(frame, lines)
-    line_image = display_lines(frame, averaged_lines)
-    combo_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
-    cv2.imshow("result", combo_image)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-cap.release()
-cv2.destroyAllWindows()
+# cap = cv2.VideoCapture("test2.mp4")
+# while(cap.isOpened()):
+#     _, frame = cap.read()
+#     canny_image = canny(frame)
+#     cropped_canny = region_of_interest(canny_image)
+#     lines = cv2.HoughLinesP(cropped_canny, 2, np.pi/180, 100, np.array([]), minLineLength=40,maxLineGap=5)
+#     averaged_lines = average_slope_intercept(frame, lines)
+#     line_image = display_lines(frame, averaged_lines)
+#     combo_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
+#     cv2.imshow("result", combo_image)
+#     if cv2.waitKey(1) & 0xFF == ord('q'):
+#         break
+# cap.release()
+# cv2.destroyAllWindows()
